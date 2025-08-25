@@ -55,7 +55,12 @@ local Tab10 = Window:MakeTab({
     PremiumOnly = false
 })
 local Tab11 = Window:MakeTab({
-    Name = "Fix+Update",
+    Name = "Update+fix",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+local Tab12 = Window:MakeTab({
+    Name = "Scripter war",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -1661,5 +1666,6 @@ beliValue.Changed:Connect(function(newVal)
 end)
 Tab11:AddLabel("Fix không hien raid")
 Tab11:AddLabel("Duysira29 tủn đanh On🟢")
+Tab12:AddLabel("Tủn Vs Chon123🤓 end 3day")
 
 
