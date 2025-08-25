@@ -55,7 +55,7 @@ local Tab10 = Window:MakeTab({
     PremiumOnly = false
 })
 local Tab11 = Window:MakeTab({
-    Name = "leaderboards",
+    Name = "Fix+Update",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -1659,3 +1659,7 @@ beliValue.Changed:Connect(function(newVal)
     LabelGained:Set("Beli kiếm được: " .. FormatNumber(Gained))
     LabelPerHour:Set("Beli/giờ: " .. FormatNumber(BeliPerHour))
 end)
+Tab11:AddLabel("Fix không hien raid")
+Tab11:AddLabel("rod_gaucuto")
+
+
