@@ -1351,7 +1351,7 @@ Tab6:AddToggle({
 
 
 -- Nút Vào Raid
-Tab:AddButton({
+Tab8:AddButton({
     Name = "Vào Raid",
     Callback = function()
         local TeleportService = game:GetService("TeleportService")
@@ -1363,7 +1363,7 @@ Tab:AddButton({
 
 -- Auto Hop Raid
 getgenv().AutoHopRaid = false
-Tab:AddToggle({
+Tab8:AddToggle({
     Name = "Auto Hop Raid",
     Default = false,
     Callback = function(state)
@@ -1380,7 +1380,7 @@ Tab:AddToggle({
 
 -- Auto Cất Item Raid (ưu tiên SJW)
 getgenv().AutoStoreItemRaid = false
-Tab:AddToggle({
+Tab8:AddToggle({
     Name = "Auto Cất Item Raid (ưu tiên SJW)",
     Default = false,
     Callback = function(state)
@@ -1660,6 +1660,6 @@ beliValue.Changed:Connect(function(newVal)
     LabelPerHour:Set("Beli/giờ: " .. FormatNumber(BeliPerHour))
 end)
 Tab11:AddLabel("Fix không hien raid")
-Tab11:AddLabel("rod_gaucuto")
+Tab11:AddLabel("Duysira29 tủn đanh On🟢")
 
 
