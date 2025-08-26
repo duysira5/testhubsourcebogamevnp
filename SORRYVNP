@@ -1668,4 +1668,80 @@ Tab11:AddLabel("Fix không hien raid")
 Tab11:AddLabel("Duysira29 tủn đanh On🟢")
 Tab12:AddLabel("Tủn Vs Chon123🤓 end 3day")
 
+--// TextBox nhập code
+Tab7:AddTextbox({
+	Name = "Code",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		local ClipboardCode = nil
+		
+		if Value == "175Sub" then
+			ClipboardCode = [[
+while true do 
+	workspace.NPCS.Quest9.ClickPart.QuestTake.QuestTake.Accept1.RemoteEvent:FireServer()
+	wait(0.1)
+end
+]]
+		elseif Value == "Tunbee" then
+			ClipboardCode = [[
+local Players = game:GetService("Players")
+local armors = {"Cursed-Armor", "Unique-Armor", "Darkness-Armor", "Thunder-Armor", "Thunder-Armor", "Diamond-Armor", "Golden-Armor", "Epic-Armor", "Iron-Armor", "Wooden-Armor"}
+
+for _, player in pairs(Players:GetPlayers()) do
+	local backpack = player:FindFirstChild("Backpack")
+	if backpack then
+		for _, armorName in pairs(armors) do
+			local armor = backpack:FindFirstChild(armorName)
+			if armor and armor:FindFirstChild("K") and armor.K:FindFirstChild("Fire") then
+				armor.K.Fire:FireServer()
+			end
+		end
+	end
+end
+]]
+		elseif Value == "KA2024" then
+			ClipboardCode = [[
+getgenv().G = true
+getgenv().Creator = 'https://discord.gg/B3HqPPzFYr - HalloweenGaster'
+while getgenv().G and getgenv().Creator == 'https://discord.gg/B3HqPPzFYr - HalloweenGaster' do
+	wait(0.9)
+	sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 112412400000)
+	sethiddenproperty(game.Players.LocalPlayer, "MaxSimulationRadius", 112412400000)
+	for i,d in pairs(game.Workspace:GetDescendants()) do
+		if d.ClassName == 'Humanoid' and d.Parent.Name ~= game.Players.LocalPlayer.Name then
+			d.Health = 0
+		end
+	end
+end
+]]
+		elseif Value == "Secret" then
+			ClipboardCode = [[
+while true do
+	fireclickdetector(game:GetService("Workspace").MAP["STARTER ISLAND [ Lv 1+ ]"]["Secret Random"].RANDOM)
+	wait(0.1)
+end
+]]
+		end
+
+		-- Nếu có code thì copy vào clipboard
+		if ClipboardCode then
+			setclipboard(ClipboardCode)
+			OrionLib:MakeNotification({
+				Name = "Thành công!",
+				Content = "Code đã được copy vào clipboard!",
+				Image = "rbxassetid://4483345998",
+				Time = 3
+			})
+		else
+			OrionLib:MakeNotification({
+				Name = "Sai Code",
+				Content = "Không tìm thấy code phù hợp!",
+				Image = "rbxassetid://4483345998",
+				Time = 3
+			})
+		end
+	end
+})
+
 
