@@ -1,65 +1,70 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/vinh12eqweaws/zingmods/refs/heads/main/zingpro')))()
 
-local Window = OrionLib:MakeWindow({Name = "Ngu hub V2", HidePremium = false, SaveConfig = true, ConfigFolder = "dxl_bf"})
-
+local Window = OrionLib:MakeWindow({Name = "Atlas 0.9 beta", HidePremium = false, SaveConfig = true, ConfigFolder = "dxl_bf"})
 local Tab = Window:MakeTab({
-    Name = "World",
+    Name = "Home",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
 local Tab2 = Window:MakeTab({
-    Name = "Localplayer",
+    Name = "World",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
 local Tab3 = Window:MakeTab({
+    Name = "Localplayer",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Tab4 = Window:MakeTab({
     Name = "Stats+Skill",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab4 = Window:MakeTab({
+local Tab5 = Window:MakeTab({
     Name = "Check+fake",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab5 = Window:MakeTab({
+local Tab6 = Window:MakeTab({
     Name = "Shop",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab6 = Window:MakeTab({
+local Tab7 = Window:MakeTab({
     Name = "Farm🧐",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab7 = Window:MakeTab({
+local Tab8 = Window:MakeTab({
     Name = "Setting ⚙️",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab8 = Window:MakeTab({
+local Tab9 = Window:MakeTab({
     Name = "Raid 70%",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab9 = Window:MakeTab({
+local Tab10 = Window:MakeTab({
     Name = "Players",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab10 = Window:MakeTab({
+local Tab11 = Window:MakeTab({
     Name = "Fast attack",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab11 = Window:MakeTab({
+local Tab12 = Window:MakeTab({
     Name = "Update+fix",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab12 = Window:MakeTab({
+local Tab13 = Window:MakeTab({
     Name = "Scripter war",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
@@ -97,7 +102,7 @@ local function updateAuraCircle()
 end
 
 -- Toggle Kill Aura
-Tab:AddToggle({
+Tab2:AddToggle({
     Name = "Kill Aura",
     Default = false,
     Callback = function(Value)
@@ -134,7 +139,7 @@ Tab:AddToggle({
 })
 
 -- Slider chỉnh phạm vi
-Tab:AddSlider({
+Tab2:AddSlider({
     Name = "Kích thước aura",
     Min = 10,
     Max = 500,
@@ -149,7 +154,7 @@ Tab:AddSlider({
 })
 local PvPLoop = false
 
-Tab:AddToggle({
+Tab2:AddToggle({
     Name = "⭐Attack PvP Off",
     Default = false,
     Callback = function(Value)
@@ -185,7 +190,7 @@ Tab:AddToggle({
 
 
 -- Super ultra skill (chỉ kích hoạt 1 nửa)
-Tab:AddButton({
+Tab2:AddButton({
     Name = "Super ultra skill",
     Callback = function()
         local allObjs = {}
@@ -211,7 +216,7 @@ Tab:AddButton({
 })
 
 -- ⭐Super Legendary Spam skill (kích hoạt toàn bộ)
-Tab:AddButton({
+Tab2:AddButton({
     Name = "⭐Super Legendary Spam skill",
     Callback = function()
         for _, obj in ipairs(game:GetDescendants()) do
@@ -231,7 +236,7 @@ Tab:AddButton({
 local TeleportButtons = {}
 
 -- Tạo nút dịch chuyển
-Tab:AddTextbox({
+Tab2:AddTextbox({
     Name = "Tạo nút dịch chuyển",
     Default = "",
     TextDisappear = true,
@@ -256,7 +261,7 @@ Tab:AddTextbox({
 })
 
 -- Ghi tên nút cần xóa lưu
-Tab:AddTextbox({
+Tab2:AddTextbox({
     Name = "Ghi tên nút cần xóa lưu",
     Default = "",
     TextDisappear = true,
@@ -272,7 +277,7 @@ Tab:AddTextbox({
 })
 
 -- Xóa tất cả lưu settings
-Tab:AddButton({
+Tab2:AddButton({
     Name = "Xóa tất cả lưu settings",
     Callback = function()
         TeleportButtons = {}
@@ -281,7 +286,7 @@ Tab:AddButton({
 })
 
 -- Giả sử Tab4 đã được tạo sẵn
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "ESP",
     Default = false,
     Callback = function(state)
@@ -338,7 +343,7 @@ Tab2:AddToggle({
         end
     end
 })
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "ESP Backpack",
     Default = false,
     Callback = function(Value)
@@ -438,7 +443,7 @@ Tab2:AddToggle({
         end
     end
 })
-Tab:AddToggle({
+Tab3:AddToggle({
     Name = "Tracers",
     Default = false,
     Callback = function(Value)
@@ -548,7 +553,7 @@ OrionLib:Init()
 
 
 -- Thanh kéo chỉnh size chữ ESP
-Tab2:AddSlider({
+Tab3:AddSlider({
     Name = "ESP Name Size",
     Min = 10,
     Max = 50,
@@ -567,7 +572,7 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 -- Nút On/Off
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "Tự động quay lại chỗ đã chết",
     Default = false,
     Callback = function(Value)
@@ -595,7 +600,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
         char:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(lastPosition)
     end
 end)
-Tab2:AddButton({
+Tab3:AddButton({
     Name = "Set/Xoá điểm hồi sinh/Saving",
     Callback = function()
         if _G.CustomRespawnPoint then
@@ -621,7 +626,7 @@ Tab2:AddButton({
         end
     end    
 })
-Tab2:AddButton({
+Tab3:AddButton({
     Name = "Base Sky/Saving",
     Callback = function()
         local player = game.Players.LocalPlayer
@@ -644,7 +649,7 @@ Tab2:AddButton({
 })
 local AutoRemoveEffectsEnabled = false
 
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "Auto Xoá Hiệu Ứng(đang tối ưu📉)",
     Callback = function(Value)
         AutoRemoveEffectsEnabled = Value
@@ -665,7 +670,7 @@ Tab2:AddToggle({
     end
 })
 
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "⭐ Auto armor",
     Default = false,
     Callback = function(Value)
@@ -697,7 +702,7 @@ Tab2:AddToggle({
         end
     end
 })
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "⭐ Auto Storages",
     Default = false,
     Callback = function(Value)
@@ -726,7 +731,7 @@ Tab2:AddToggle({
         end
     end
 })
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "Inf Jump",
     Default = false,
     Callback = function(Value)
@@ -742,7 +747,7 @@ game:GetService("UserInputService").JumpRequest:Connect(function()
         end
     end
 end)
-Tab2:AddToggle({
+Tab3:AddToggle({
     Name = "Noclip",
     Default = false,
     Callback = function(Value)
@@ -769,7 +774,7 @@ Tab2:AddToggle({
 
 local autoAura = false
 
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = " Auto Skills Aura",
     Default = false,
     Callback = function(Value)
@@ -791,7 +796,7 @@ Tab3:AddToggle({
         end
     end
 })
-Tab3:AddSlider({
+Tab4:AddSlider({
     Name = "Kích thước Aura",
     Min = 10,
     Max = 500,
@@ -807,7 +812,7 @@ Tab3:AddSlider({
 OrionLib:Init()
 
 -- Auto Melee
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto Melee",
     Default = false,
     Callback = function(state)
@@ -839,7 +844,7 @@ Tab3:AddToggle({
 })
 
 -- Auto Sword
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto Sword",
     Default = false,
     Callback = function(state)
@@ -855,7 +860,7 @@ Tab3:AddToggle({
 })
 
 -- Auto DevilFruit
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto DevilFruit",
     Default = false,
     Callback = function(state)
@@ -880,7 +885,7 @@ local AutoB = false
 local AutoN = false
 
 -- Thêm nút on/off
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto Z",
     Default = false,
     Callback = function(Value)
@@ -888,7 +893,7 @@ Tab3:AddToggle({
     end
 })
 
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto X",
     Default = false,
     Callback = function(Value)
@@ -896,7 +901,7 @@ Tab3:AddToggle({
     end
 })
 
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto C",
     Default = false,
     Callback = function(Value)
@@ -904,7 +909,7 @@ Tab3:AddToggle({
     end
 })
 
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto B",
     Default = false,
     Callback = function(Value)
@@ -912,7 +917,7 @@ Tab3:AddToggle({
     end
 })
 
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Auto N",
     Default = false,
     Callback = function(Value)
@@ -966,7 +971,7 @@ local dropdown = Tab4:AddDropdown({
 })
 
 -- Nút check 3 kho
-Tab4:AddButton({
+Tab5:AddButton({
     Name = "Check 3 kho",
     Callback = function()
         if not selectedPlayerName then
@@ -1009,7 +1014,7 @@ Tab4:AddButton({
 })
 
 -- Nút check Level and Belis
-Tab4:AddButton({
+Tab5:AddButton({
     Name = "Check Level and Belis",
     Callback = function()
         if not selectedPlayerName then
@@ -1070,7 +1075,7 @@ Players.PlayerRemoving:Connect(function()
 end)
 
 OrionLib:Init()
-Tab4:AddTextbox({
+Tab5:AddTextbox({
     Name = "Fake Level",
     Default = "",
     TextDisappear = false,
@@ -1086,7 +1091,7 @@ Tab4:AddTextbox({
         end
     end
 })
-Tab4:AddTextbox({
+Tab5:AddTextbox({
     Name = "Fake Beli",
     Default = "",
     TextDisappear = false,
@@ -1102,7 +1107,7 @@ Tab4:AddTextbox({
         end
     end
 })
-Tab4:AddButton({
+Tab5:AddButton({
     Name = "Rain item but fake",
     Callback = function()
         OrionLib:MakeNotification({
@@ -1125,7 +1130,7 @@ local BagOptions = {"100k (sell)", "1M beli (sell)", "10M beli (sell)", "100M be
 local SelectedBag = BagOptions[1]
 local AutoHuyEnabled = false
 
-Tab5:AddDropdown({
+Tab6:AddDropdown({
     Name = "Choose Bag",
     Options = BagOptions,
     CurrentOption = BagOptions[1],
@@ -1134,7 +1139,7 @@ Tab5:AddDropdown({
     end
 })
 
-Tab5:AddToggle({
+Tab6:AddToggle({
     Name = "Auto buy",
     Callback = function(Value)
         AutoHuyEnabled = Value
@@ -1147,7 +1152,7 @@ Tab5:AddToggle({
 
 local SecretX10 = false
 
-Tab5:AddToggle({
+Tab6:AddToggle({
     Name = "Secret X10⭐",
     Default = false,
     Callback = function(state)
@@ -1167,7 +1172,7 @@ Tab5:AddToggle({
         end
     end
 })
-Tab5:AddButton({
+Tab6:AddButton({
     Name = "Buy sniper combat",
     Callback = function()
         local target = game:GetService("Workspace").MAP["DAK ISLAND [Lv 1350+]"]:FindFirstChildWhichIsA("ClickDetector", true)
@@ -1180,7 +1185,7 @@ Tab5:AddButton({
 })
 local AutoSandoEnabled = false
 
-Tab5:AddToggle({
+Tab6:AddToggle({
     Name = "Auto Sando x5⭐",
     Callback = function(Value)
         AutoSandoEnabled = Value
@@ -1190,7 +1195,7 @@ Tab5:AddToggle({
         end
     end
 })
-Tab5:AddToggle({
+Tab6:AddToggle({
     Name = "Auto Random Fruit",
     Callback = function(Value)
         if Value then
@@ -1207,7 +1212,7 @@ Tab5:AddToggle({
 
 local AutoYoruEnabled = false
 
-Tab5:AddToggle({
+Tab6:AddToggle({
     Name = "Auto Yoru V3 x10⭐",
     Callback = function(Value)
         AutoYoruEnabled = Value
@@ -1293,7 +1298,7 @@ Tab6:AddButton({
     Callback = IncreaseHitbox
 })
 
-Tab6:AddButton({
+Tab7:AddButton({
     Name = "Teleport to NPC",
     Callback = TeleportToNPC
 })
@@ -1327,7 +1332,7 @@ Tab6:AddDropdown({
     end
 })
 
-Tab6:AddToggle({
+Tab7:AddToggle({
     Name = "Bật Auto NV",
     Callback = function(Value)
         AutoNVEnabled = Value
@@ -1356,7 +1361,7 @@ Tab6:AddToggle({
 
 
 -- Nút Vào Raid
-Tab8:AddButton({
+Tab7:AddButton({
     Name = "Vào Raid",
     Callback = function()
         local TeleportService = game:GetService("TeleportService")
@@ -1665,7 +1670,7 @@ beliValue.Changed:Connect(function(newVal)
     LabelPerHour:Set("Beli/giờ: " .. FormatNumber(BeliPerHour))
 end)
 Tab11:AddLabel("Fix không hien raid")
-Tab11:AddLabel("Duysira29 tủn đanh On🟢")
+Tab11:AddLabel("đang update")
 Tab12:AddLabel("Tủn Vs Chon123🤓 end 3day")
 
 --// TextBox nhập code
