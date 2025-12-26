@@ -1,70 +1,64 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/vinh12eqweaws/zingmods/refs/heads/main/zingpro')))()
 
-local Window = OrionLib:MakeWindow({Name = "Atlas 0.9 beta", HidePremium = false, SaveConfig = true, ConfigFolder = "dxl_bf"})
-local Tab = Window:MakeTab({
-    Name = "Home",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
 
-local Tab2 = Window:MakeTab({
+local Tab = Window:MakeTab({
     Name = "World",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
-local Tab3 = Window:MakeTab({
+local Tab2 = Window:MakeTab({
     Name = "Localplayer",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
-local Tab4 = Window:MakeTab({
+local Tab3 = Window:MakeTab({
     Name = "Stats+Skill",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab5 = Window:MakeTab({
+local Tab4 = Window:MakeTab({
     Name = "Check+fake",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab6 = Window:MakeTab({
+local Tab5 = Window:MakeTab({
     Name = "Shop",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab7 = Window:MakeTab({
+local Tab6 = Window:MakeTab({
     Name = "Farm🧐",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab8 = Window:MakeTab({
+local Tab7 = Window:MakeTab({
     Name = "Setting ⚙️",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab9 = Window:MakeTab({
+local Tab8 = Window:MakeTab({
     Name = "Raid 70%",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab10 = Window:MakeTab({
+local Tab9 = Window:MakeTab({
     Name = "Players",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab11 = Window:MakeTab({
+local Tab10 = Window:MakeTab({
     Name = "Fast attack",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab12 = Window:MakeTab({
+local Tab11 = Window:MakeTab({
     Name = "Update+fix",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local Tab13 = Window:MakeTab({
+local Tab12 = Window:MakeTab({
     Name = "Scripter war",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
@@ -102,7 +96,7 @@ local function updateAuraCircle()
 end
 
 -- Toggle Kill Aura
-Tab2:AddToggle({
+Tab:AddToggle({
     Name = "Kill Aura",
     Default = false,
     Callback = function(Value)
@@ -112,7 +106,7 @@ Tab2:AddToggle({
         if Value then
             createAuraCircle()
             while getgenv().G and getgenv().Creator == 'https://discord.gg/B3HqPPzFYr - HalloweenGaster' do
-                task.wait(0.2)
+                task.wait(1.5)
                 updateAuraCircle()
 
                 sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 112412400000)
@@ -139,11 +133,11 @@ Tab2:AddToggle({
 })
 
 -- Slider chỉnh phạm vi
-Tab2:AddSlider({
+Tab:AddSlider({
     Name = "Kích thước aura",
     Min = 10,
     Max = 500,
-    Default = 50,
+    Default = 250,
     Color = Color3.fromRGB(0,255,0), -- màu xanh lá
     Increment = 10,
     ValueName = "studs",
@@ -154,7 +148,7 @@ Tab2:AddSlider({
 })
 local PvPLoop = false
 
-Tab2:AddToggle({
+Tab:AddToggle({
     Name = "⭐Attack PvP Off",
     Default = false,
     Callback = function(Value)
@@ -179,7 +173,7 @@ Tab2:AddToggle({
                             end
                         end
                     end
-                    task.wait(0.2)
+                    task.wait(1.2)
                 end
             end)
         else
@@ -190,7 +184,7 @@ Tab2:AddToggle({
 
 
 -- Super ultra skill (chỉ kích hoạt 1 nửa)
-Tab2:AddButton({
+Tab:AddButton({
     Name = "Super ultra skill",
     Callback = function()
         local allObjs = {}
@@ -216,7 +210,7 @@ Tab2:AddButton({
 })
 
 -- ⭐Super Legendary Spam skill (kích hoạt toàn bộ)
-Tab2:AddButton({
+Tab:AddButton({
     Name = "⭐Super Legendary Spam skill",
     Callback = function()
         for _, obj in ipairs(game:GetDescendants()) do
@@ -236,7 +230,7 @@ Tab2:AddButton({
 local TeleportButtons = {}
 
 -- Tạo nút dịch chuyển
-Tab2:AddTextbox({
+Tab:AddTextbox({
     Name = "Tạo nút dịch chuyển",
     Default = "",
     TextDisappear = true,
@@ -261,7 +255,7 @@ Tab2:AddTextbox({
 })
 
 -- Ghi tên nút cần xóa lưu
-Tab2:AddTextbox({
+Tab:AddTextbox({
     Name = "Ghi tên nút cần xóa lưu",
     Default = "",
     TextDisappear = true,
@@ -277,7 +271,7 @@ Tab2:AddTextbox({
 })
 
 -- Xóa tất cả lưu settings
-Tab2:AddButton({
+Tab:AddButton({
     Name = "Xóa tất cả lưu settings",
     Callback = function()
         TeleportButtons = {}
@@ -286,7 +280,7 @@ Tab2:AddButton({
 })
 
 -- Giả sử Tab4 đã được tạo sẵn
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "ESP",
     Default = false,
     Callback = function(state)
@@ -343,7 +337,7 @@ Tab3:AddToggle({
         end
     end
 })
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "ESP Backpack",
     Default = false,
     Callback = function(Value)
@@ -443,7 +437,7 @@ Tab3:AddToggle({
         end
     end
 })
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "Tracers",
     Default = false,
     Callback = function(Value)
@@ -553,7 +547,7 @@ OrionLib:Init()
 
 
 -- Thanh kéo chỉnh size chữ ESP
-Tab3:AddSlider({
+Tab2:AddSlider({
     Name = "ESP Name Size",
     Min = 10,
     Max = 50,
@@ -572,7 +566,7 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 -- Nút On/Off
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "Tự động quay lại chỗ đã chết",
     Default = false,
     Callback = function(Value)
@@ -600,7 +594,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
         char:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(lastPosition)
     end
 end)
-Tab3:AddButton({
+Tab2:AddButton({
     Name = "Set/Xoá điểm hồi sinh/Saving",
     Callback = function()
         if _G.CustomRespawnPoint then
@@ -626,7 +620,7 @@ Tab3:AddButton({
         end
     end    
 })
-Tab3:AddButton({
+Tab2:AddButton({
     Name = "Base Sky/Saving",
     Callback = function()
         local player = game.Players.LocalPlayer
@@ -649,7 +643,7 @@ Tab3:AddButton({
 })
 local AutoRemoveEffectsEnabled = false
 
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "Auto Xoá Hiệu Ứng(đang tối ưu📉)",
     Callback = function(Value)
         AutoRemoveEffectsEnabled = Value
@@ -670,7 +664,7 @@ Tab3:AddToggle({
     end
 })
 
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "⭐ Auto armor",
     Default = false,
     Callback = function(Value)
@@ -702,7 +696,7 @@ Tab3:AddToggle({
         end
     end
 })
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "⭐ Auto Storages",
     Default = false,
     Callback = function(Value)
@@ -731,7 +725,7 @@ Tab3:AddToggle({
         end
     end
 })
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "Inf Jump",
     Default = false,
     Callback = function(Value)
@@ -747,7 +741,7 @@ game:GetService("UserInputService").JumpRequest:Connect(function()
         end
     end
 end)
-Tab3:AddToggle({
+Tab2:AddToggle({
     Name = "Noclip",
     Default = false,
     Callback = function(Value)
@@ -774,7 +768,7 @@ Tab3:AddToggle({
 
 local autoAura = false
 
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = " Auto Skills Aura",
     Default = false,
     Callback = function(Value)
@@ -796,7 +790,7 @@ Tab4:AddToggle({
         end
     end
 })
-Tab4:AddSlider({
+Tab3:AddSlider({
     Name = "Kích thước Aura",
     Min = 10,
     Max = 500,
@@ -812,7 +806,7 @@ Tab4:AddSlider({
 OrionLib:Init()
 
 -- Auto Melee
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto Melee",
     Default = false,
     Callback = function(state)
@@ -844,7 +838,7 @@ Tab3:AddToggle({
 })
 
 -- Auto Sword
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto Sword",
     Default = false,
     Callback = function(state)
@@ -860,7 +854,7 @@ Tab4:AddToggle({
 })
 
 -- Auto DevilFruit
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto DevilFruit",
     Default = false,
     Callback = function(state)
@@ -885,7 +879,7 @@ local AutoB = false
 local AutoN = false
 
 -- Thêm nút on/off
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto Z",
     Default = false,
     Callback = function(Value)
@@ -893,7 +887,7 @@ Tab4:AddToggle({
     end
 })
 
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto X",
     Default = false,
     Callback = function(Value)
@@ -901,7 +895,7 @@ Tab4:AddToggle({
     end
 })
 
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto C",
     Default = false,
     Callback = function(Value)
@@ -909,7 +903,7 @@ Tab4:AddToggle({
     end
 })
 
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto B",
     Default = false,
     Callback = function(Value)
@@ -917,7 +911,7 @@ Tab4:AddToggle({
     end
 })
 
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Auto N",
     Default = false,
     Callback = function(Value)
@@ -971,7 +965,7 @@ local dropdown = Tab4:AddDropdown({
 })
 
 -- Nút check 3 kho
-Tab5:AddButton({
+Tab4:AddButton({
     Name = "Check 3 kho",
     Callback = function()
         if not selectedPlayerName then
@@ -1014,7 +1008,7 @@ Tab5:AddButton({
 })
 
 -- Nút check Level and Belis
-Tab5:AddButton({
+Tab4:AddButton({
     Name = "Check Level and Belis",
     Callback = function()
         if not selectedPlayerName then
@@ -1075,7 +1069,7 @@ Players.PlayerRemoving:Connect(function()
 end)
 
 OrionLib:Init()
-Tab5:AddTextbox({
+Tab4:AddTextbox({
     Name = "Fake Level",
     Default = "",
     TextDisappear = false,
@@ -1091,7 +1085,7 @@ Tab5:AddTextbox({
         end
     end
 })
-Tab5:AddTextbox({
+Tab4:AddTextbox({
     Name = "Fake Beli",
     Default = "",
     TextDisappear = false,
@@ -1107,7 +1101,7 @@ Tab5:AddTextbox({
         end
     end
 })
-Tab5:AddButton({
+Tab4:AddButton({
     Name = "Rain item but fake",
     Callback = function()
         OrionLib:MakeNotification({
@@ -1130,7 +1124,7 @@ local BagOptions = {"100k (sell)", "1M beli (sell)", "10M beli (sell)", "100M be
 local SelectedBag = BagOptions[1]
 local AutoHuyEnabled = false
 
-Tab6:AddDropdown({
+Tab5:AddDropdown({
     Name = "Choose Bag",
     Options = BagOptions,
     CurrentOption = BagOptions[1],
@@ -1139,7 +1133,7 @@ Tab6:AddDropdown({
     end
 })
 
-Tab6:AddToggle({
+Tab5:AddToggle({
     Name = "Auto buy",
     Callback = function(Value)
         AutoHuyEnabled = Value
@@ -1152,7 +1146,7 @@ Tab6:AddToggle({
 
 local SecretX10 = false
 
-Tab6:AddToggle({
+Tab5:AddToggle({
     Name = "Secret X10⭐",
     Default = false,
     Callback = function(state)
@@ -1172,7 +1166,7 @@ Tab6:AddToggle({
         end
     end
 })
-Tab6:AddButton({
+Tab5:AddButton({
     Name = "Buy sniper combat",
     Callback = function()
         local target = game:GetService("Workspace").MAP["DAK ISLAND [Lv 1350+]"]:FindFirstChildWhichIsA("ClickDetector", true)
@@ -1185,7 +1179,7 @@ Tab6:AddButton({
 })
 local AutoSandoEnabled = false
 
-Tab6:AddToggle({
+Tab5:AddToggle({
     Name = "Auto Sando x5⭐",
     Callback = function(Value)
         AutoSandoEnabled = Value
@@ -1195,7 +1189,7 @@ Tab6:AddToggle({
         end
     end
 })
-Tab6:AddToggle({
+Tab5:AddToggle({
     Name = "Auto Random Fruit",
     Callback = function(Value)
         if Value then
@@ -1212,7 +1206,7 @@ Tab6:AddToggle({
 
 local AutoYoruEnabled = false
 
-Tab6:AddToggle({
+Tab5:AddToggle({
     Name = "Auto Yoru V3 x10⭐",
     Callback = function(Value)
         AutoYoruEnabled = Value
@@ -1245,7 +1239,7 @@ Tab6:AddDropdown({
 })
 
 local function IncreaseHitbox()
-    _G.HeadSize = 10
+    _G.HeadSize = 39.5
     _G.Disabled = true
     game:GetService('RunService').RenderStepped:connect(function()
         if _G.Disabled then
@@ -1253,7 +1247,7 @@ local function IncreaseHitbox()
             if npc and npc:FindFirstChild("HumanoidRootPart") then
                 pcall(function()
                     npc.HumanoidRootPart.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
-                    npc.HumanoidRootPart.Transparency = 0.7
+                    npc.HumanoidRootPart.Transparency = 1.4
                     npc.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
                     npc.HumanoidRootPart.Material = "Neon"
                     npc.HumanoidRootPart.CanCollide = false
@@ -1298,7 +1292,7 @@ Tab6:AddButton({
     Callback = IncreaseHitbox
 })
 
-Tab7:AddButton({
+Tab6:AddButton({
     Name = "Teleport to NPC",
     Callback = TeleportToNPC
 })
@@ -1332,7 +1326,7 @@ Tab6:AddDropdown({
     end
 })
 
-Tab7:AddToggle({
+Tab6:AddToggle({
     Name = "Bật Auto NV",
     Callback = function(Value)
         AutoNVEnabled = Value
@@ -1373,7 +1367,7 @@ Tab7:AddButton({
 
 -- Auto Hop Raid
 getgenv().AutoHopRaid = false
-Tab8:AddToggle({
+Tab7:AddToggle({
     Name = "Auto Hop Raid",
     Default = false,
     Callback = function(state)
@@ -1390,7 +1384,7 @@ Tab8:AddToggle({
 
 -- Auto Cất Item Raid (ưu tiên SJW)
 getgenv().AutoStoreItemRaid = false
-Tab8:AddToggle({
+Tab7:AddToggle({
     Name = "Auto Cất Item Raid (ưu tiên SJW)",
     Default = false,
     Callback = function(state)
@@ -1439,7 +1433,7 @@ game:GetService('RunService').RenderStepped:connect(function()
     end
 end)
 
-Tab9:AddToggle({
+Tab8:AddToggle({
     Name = "Hitbox All players 📉",
     Callback = function(Value)
         HitboxEnabled = Value
@@ -1507,7 +1501,7 @@ local function killPlayer()
     end
 end
 
-Tab9:AddToggle({
+Tab8:AddToggle({
     Name = "Bring Player",
     Callback = function(value)
         bringPlayerEnabled = value
@@ -1517,7 +1511,7 @@ Tab9:AddToggle({
     end
 })
 
-Tab9:AddToggle({
+Tab8:AddToggle({
     Name = "Kill",
     Callback = function(value)
         killEnabled = value
@@ -1548,7 +1542,7 @@ local function GetTools()
 end
 
 -- Dropdown chọn item
-local Dropdown1 = Tab10:AddDropdown({
+local Dropdown1 = Tab9:AddDropdown({
     Name = "Item List",
     Description = "Select an item",
     Options = GetTools(),
@@ -1573,7 +1567,7 @@ end)
 
 -- Dropdown chỉnh tốc độ Fast Attack
 _G.FastAttackWait = 0.1 -- mặc định
-local SpeedDropdown = Tab7:AddDropdown({
+local SpeedDropdown = Tab10:AddDropdown({
     Name = "Fast Attack Speed",
     Description = "Chọn tốc độ đánh",
     Options = {"0.1","0.2","0.5","1"},
@@ -1617,7 +1611,7 @@ local Toggle1 = Tab10:AddToggle({
     end
 })
 -- Dropdown chỉnh tốc độ chạy
-local WalkspeedDropdown = Tab7:AddDropdown({
+local WalkspeedDropdown = Tab10:AddDropdown({
     Name = "Chọn tốc độ chạy",
     Description = "Thay đổi tốc độ di chuyển",
     Options = {"20","40","50","100","200"},
@@ -1674,7 +1668,7 @@ Tab11:AddLabel("đang update")
 Tab12:AddLabel("Tủn Vs Chon123🤓 end 3day")
 
 --// TextBox nhập code
-Tab7:AddTextbox({
+Tab10:AddTextbox({
 	Name = "Code",
 	Default = "",
 	TextDisappear = true,
