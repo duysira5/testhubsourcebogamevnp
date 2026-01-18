@@ -1353,6 +1353,106 @@ Tab6:AddToggle({
 
 
 
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local LP = Players.LocalPlayer
+
+-- biến
+local webhookUrl = ""
+local sendInterval = 5 * 60 -- mặc định 5 phút
+local lastLevel = LP.Data.Levels.Value
+
+-- hàm gửi webhook
+local function sendWebhook(levelDiff)
+	if webhookUrl == "" then return end
+
+	local data = {
+		username = "Roblox Webhook",
+		embeds = {{
+			title = "📊 Thống kê người chơi",
+			color = 5814783,
+			fields = {
+				{
+					name = "👤 Player",
+					value = LP.Name,
+					inline = false
+				},
+				{
+					name = "⭐ Level hiện tại",
+					value = tostring(LP.Data.Levels.Value),
+					inline = true
+				},
+				{
+					name = "📈 Level tăng",
+					value = "+" .. tostring(levelDiff),
+					inline = true
+				},
+				{
+					name = "💰 Belis",
+					value = tostring(LP.Data.Belis.Value),
+					inline = false
+				}
+			},
+			footer = {
+				text = "Webhook by OrionLib"
+			}
+		}}
+	}
+
+	local json = HttpService:JSONEncode(data)
+
+	pcall(function()
+		request({
+			Url = webhookUrl,
+			Method = "POST",
+			Headers = {["Content-Type"] = "application/json"},
+			Body = json
+		})
+	end)
+end
+
+-- Textbox webhook
+Tab6:AddTextbox({
+	Name = "Discord Webhook URL",
+	Default = "",
+	TextDisappear = false,
+	Callback = function(v)
+		webhookUrl = v
+	end
+})
+
+-- Slider chỉnh thời gian
+Tab6:AddSlider({
+	Name = "Thời gian gửi webhook (phút)",
+	Min = 1,
+	Max = 60,
+	Default = 5,
+	Increment = 1,
+	ValueName = "phút",
+	Callback = function(v)
+		sendInterval = v * 60
+	end
+})
+
+-- Button test send
+Tab6:AddButton({
+	Name = "Test Send Webhook",
+	Callback = function()
+		sendWebhook(0)
+	end
+})
+
+-- Loop gửi tự động
+task.spawn(function()
+	while task.wait(sendInterval) do
+		local currentLevel = LP.Data.Levels.Value
+		local diff = currentLevel - lastLevel
+		lastLevel = currentLevel
+		sendWebhook(diff)
+	end
+end)
+
+OrionLib:Init()
 
 -- Nút Vào Raid
 Tab7:AddButton({
