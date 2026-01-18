@@ -1620,6 +1620,93 @@ Tab8:AddToggle({
         end
     end
 })
+-- SERVICES
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LP = Players.LocalPlayer
+local Mouse = LP:GetMouse()
+
+-- BIẾN
+local AimbotSkill = false
+local AimConnection
+
+-- TÌM MỤC TIÊU GẦN NHẤT
+local function getNearestTarget(dist)
+	if not LP.Character or not LP.Character:FindFirstChild("HumanoidRootPart") then return nil end
+	local hrp = LP.Character.HumanoidRootPart
+	local nearest, shortest = nil, dist or math.huge
+
+	-- Player
+	for _,plr in pairs(Players:GetPlayers()) do
+		if plr ~= LP and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+			local d = (hrp.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+			if d < shortest then
+				shortest = d
+				nearest = plr.Character.HumanoidRootPart
+			end
+		end
+	end
+
+	-- NPC
+	for _,npc in pairs(workspace:GetDescendants()) do
+		if npc:FindFirstChild("Humanoid") and npc:FindFirstChild("HumanoidRootPart")
+		and not Players:GetPlayerFromCharacter(npc) then
+			local d = (hrp.Position - npc.HumanoidRootPart.Position).Magnitude
+			if d < shortest then
+				shortest = d
+				nearest = npc.HumanoidRootPart
+			end
+		end
+	end
+
+	return nearest
+end
+
+-- AIM CHO SKILL CLICK (Mouse.Hit)
+local oldIndex
+oldIndex = hookmetamethod(game, "__index", function(self, key)
+	if self == Mouse and key == "Hit" and AimbotSkill then
+		local t = getNearestTarget(500)
+		if t then
+			return CFrame.new(t.Position)
+		end
+	end
+	return oldIndex(self, key)
+end)
+
+-- AIM CHO SKILL BAY THẲNG
+local function startAim()
+	AimConnection = RunService.RenderStepped:Connect(function()
+		if not AimbotSkill then return end
+		if not LP.Character or not LP.Character:FindFirstChild("HumanoidRootPart") then return end
+		local t = getNearestTarget(500)
+		if t then
+			LP.Character.HumanoidRootPart.CFrame =
+				CFrame.new(LP.Character.HumanoidRootPart.Position, t.Position)
+		end
+	end)
+end
+
+local function stopAim()
+	if AimConnection then
+		AimConnection:Disconnect()
+		AimConnection = nil
+	end
+end
+
+-- 🔘 NÚT ORIONLIB
+Tab8:AddToggle({
+	Name = "Aimbot Skill",
+	Default = false,
+	Callback = function(v)
+		AimbotSkill = v
+		if v then
+			startAim()
+		else
+			stopAim()
+		end
+	end
+})
 
 local Player = game:GetService("Players").LocalPlayer
 local Backpack = Player:WaitForChild("Backpack")
