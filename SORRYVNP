@@ -1512,7 +1512,7 @@ local function sendWebhook(levelDiff)
 end
 
 -- Textbox webhook
-Tab:AddTextbox({
+Tab6:AddTextbox({
 	Name = "Discord Webhook URL",
 	Default = "",
 	TextDisappear = false,
@@ -1564,7 +1564,7 @@ local LocalPlayer = Players.LocalPlayer
 --// TEXTBOX
 local ReportText = ""
 
-Tab:AddTextbox({
+Tab7:AddTextbox({
 	Name = "Nhập report / góp ý",
 	Default = "",
 	TextDisappear = false,
@@ -1620,7 +1620,7 @@ Tab7:AddButton({
 
 -- Auto Hop Raid
 getgenv().AutoHopRaid = false
-Tab7:AddToggle({
+Tab8:AddToggle({
     Name = "Auto Hop Raid",
     Default = false,
     Callback = function(state)
@@ -1637,7 +1637,7 @@ Tab7:AddToggle({
 
 -- Auto Cất Item Raid (ưu tiên SJW)
 getgenv().AutoStoreItemRaid = false
-Tab7:AddToggle({
+Tab8:AddToggle({
     Name = "Auto Cất Item Raid (ưu tiên SJW)",
     Default = false,
     Callback = function(state)
