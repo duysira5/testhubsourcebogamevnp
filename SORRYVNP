@@ -34,7 +34,7 @@ local Tab6 = Window:MakeTab({
     PremiumOnly = false
 })
 local Tab7 = Window:MakeTab({
-    Name = "Setting ⚙️",
+    Name = "Setting ⚙️+quest",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -1604,6 +1604,86 @@ Tab7:AddButton({
 		ReportText = ""
 	end
 })
+--// SERVICES
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local LP = Players.LocalPlayer
+
+--// SAVE
+local FILE = "tun_quest_done.json"
+local Data = {
+	Done = false,
+	MeetTun = false
+}
+
+if isfile(FILE) then
+	Data = HttpService:JSONDecode(readfile(FILE))
+end
+
+local function Save()
+	writefile(FILE, HttpService:JSONEncode(Data))
+end
+
+--// ORION
+
+
+
+
+--// NẾU ĐÃ HOÀN THÀNH
+if Data.Done then
+	Tab:AddLabel("🔥 Coming Soon :]")
+	OrionLib:Init()
+	return
+end
+
+--// QUEST LABEL
+local L1 = Tab7:AddLabel("⭐ Level: Checking...")
+local L2 = Tab7:AddLabel("💰 Beli: Checking...")
+local L3 = Tab7:AddLabel("👤 Gặp Tủn: Chưa")
+
+--// CHECK QUEST
+task.spawn(function()
+	while true do
+		task.wait(0.4)
+
+		local levelOk = LP.Data.Levels.Value >= 20000
+		local beliOk = LP.Data.Belis.Value >= 2000000000
+
+		L1:Set("⭐ Level: "..(levelOk and "Complete" or "Chưa đủ"))
+		L2:Set("💰 Beli: "..(beliOk and "Complete" or "Chưa đủ"))
+		L3:Set("👤 Gặp Tủn: "..(Data.MeetTun and "Complete" or "Chưa"))
+
+		if levelOk and beliOk and Data.MeetTun then
+			Data.Done = true
+			Save()
+			break
+		end
+	end
+
+	Tab:Clear()
+	Tab:AddLabel("🔥 Coming Soon :]")
+end)
+
+--// CHECK GẶP PHANTHINH5554
+task.spawn(function()
+	while not Data.MeetTun do
+		task.wait(0.4)
+		for _, p in pairs(Players:GetPlayers()) do
+			if p.Name == "Phanthinh5554"
+			and p.Character
+			and LP.Character then
+				local d = (p.Character.HumanoidRootPart.Position
+					- LP.Character.HumanoidRootPart.Position).Magnitude
+				if d < 20 then
+					Data.MeetTun = true
+					Save()
+				end
+			end
+		end
+	end
+end)
+
+OrionLib:Init()
 
 OrionLib:Init()
 
