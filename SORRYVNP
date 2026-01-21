@@ -1453,6 +1453,159 @@ task.spawn(function()
 end)
 
 OrionLib:Init()
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local LP = Players.LocalPlayer
+
+-- biến
+local webhookUrl = ""
+local sendInterval = 5 * 60 -- mặc định 5 phút
+local lastLevel = LP.Data.Levels.Value
+
+-- hàm gửi webhook
+local function sendWebhook(levelDiff)
+	if webhookUrl == "" then return end
+
+	local data = {
+		username = "Roblox Webhook",
+		embeds = {{
+			title = "📊 Thống kê người chơi",
+			color = 5814783,
+			fields = {
+				{
+					name = "👤 Player",
+					value = LP.Name,
+					inline = false
+				},
+				{
+					name = "⭐ Level hiện tại",
+					value = tostring(LP.Data.Levels.Value),
+					inline = true
+				},
+				{
+					name = "📈 Level tăng",
+					value = "+" .. tostring(levelDiff),
+					inline = true
+				},
+				{
+					name = "💰 Belis",
+					value = tostring(LP.Data.Belis.Value),
+					inline = false
+				}
+			},
+			footer = {
+				text = "Webhook by OrionLib"
+			}
+		}}
+	}
+
+	local json = HttpService:JSONEncode(data)
+
+	pcall(function()
+		request({
+			Url = webhookUrl,
+			Method = "POST",
+			Headers = {["Content-Type"] = "application/json"},
+			Body = json
+		})
+	end)
+end
+
+-- Textbox webhook
+Tab:AddTextbox({
+	Name = "Discord Webhook URL",
+	Default = "",
+	TextDisappear = false,
+	Callback = function(v)
+		webhookUrl = v
+	end
+})
+
+-- Slider chỉnh thời gian
+Tab7:AddSlider({
+	Name = "Thời gian gửi webhook (phút)",
+	Min = 1,
+	Max = 60,
+	Default = 5,
+	Increment = 1,
+	ValueName = "phút",
+	Callback = function(v)
+		sendInterval = v * 60
+	end
+})
+
+-- Button test send
+Tab7:AddButton({
+	Name = "Test Send Webhook",
+	Callback = function()
+		sendWebhook(0)
+	end
+})
+
+-- Loop gửi tự động
+task.spawn(function()
+	while task.wait(sendInterval) do
+		local currentLevel = LP.Data.Levels.Value
+		local diff = currentLevel - lastLevel
+		lastLevel = currentLevel
+		sendWebhook(diff)
+	end
+end)
+
+OrionLib:Init()
+--// WEBHOOK (REPORT)
+local WEBHOOK_URL = "https://discord.com/api/webhooks/1462030842582007991/csiIpBzjho6fykZhTcKgrwkABIChEZgffbgx4Hm2Qiv3F8_b3pDXrBbiXd4YeVABap2O"
+
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local LocalPlayer = Players.LocalPlayer
+
+
+--// TEXTBOX
+local ReportText = ""
+
+Tab:AddTextbox({
+	Name = "Nhập report / góp ý",
+	Default = "",
+	TextDisappear = false,
+	Callback = function(Value)
+		ReportText = Value
+	end
+})
+
+--// SEND BUTTON
+Tab7:AddButton({
+	Name = "Send Report",
+	Callback = function()
+		if ReportText == "" then
+			warn("Chưa nhập report")
+			return
+		end
+
+		request({
+			Url = WEBHOOK_URL,
+			Method = "POST",
+			Headers = { ["Content-Type"] = "application/json" },
+			Body = HttpService:JSONEncode({
+				username = "User Report",
+				embeds = {{
+					title = "📩 REPORT MỚI",
+					color = 16753920,
+					fields = {
+						{ name = "👤 Player", value = LocalPlayer.Name, inline = true },
+						{ name = "🆔 UserId", value = tostring(LocalPlayer.UserId), inline = true },
+						{ name = "🎮 GameId", value = tostring(game.PlaceId), inline = false },
+						{ name = "📝 Nội dung", value = ReportText, inline = false }
+					}
+				}}
+			})
+		})
+
+		ReportText = ""
+	end
+})
+
+OrionLib:Init()
 
 -- Nút Vào Raid
 Tab7:AddButton({
@@ -1850,9 +2003,9 @@ beliValue.Changed:Connect(function(newVal)
     LabelGained:Set("Beli kiếm được: " .. FormatNumber(Gained))
     LabelPerHour:Set("Beli/giờ: " .. FormatNumber(BeliPerHour))
 end)
-Tab11:AddLabel("Fix không hien raid")
-Tab11:AddLabel("đang update")
-Tab12:AddLabel("Tủn Vs Chon123🤓 end 3day")
+Tab11:AddLabel("Webhook Update phần setting ")
+Tab11:AddLabel("Load button update wait small🕳️")
+Tab11:AddLabel("Report update phần setting ")
 
 --// TextBox nhập code
 Tab10:AddTextbox({
