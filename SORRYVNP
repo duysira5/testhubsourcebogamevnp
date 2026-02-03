@@ -150,7 +150,7 @@ Tab:AddSlider({
 
 
 
-ocal TeleportButtons = {}
+local TeleportButtons = {}
 -- Tạo nút dịch chuyển
 Tab:AddTextbox({
     Name = "Tạo nút dịch chuyển",
