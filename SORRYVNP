@@ -63,7 +63,6 @@ local Tab12 = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-Tab1:AddLabel("xl bn Ck19545 minh sẽ add auto nv sớm nhat")
 local AuraRange = 50
 local auraCircle = nil
 
@@ -152,7 +151,6 @@ Tab:AddSlider({
 
 
 ocal TeleportButtons = {}
-
 -- Tạo nút dịch chuyển
 Tab:AddTextbox({
     Name = "Tạo nút dịch chuyển",
