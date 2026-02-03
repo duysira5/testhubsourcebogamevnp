@@ -147,39 +147,7 @@ Tab:AddSlider({
     end    
 })
 
-llocal Players = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
-local LocalPlayer = Players.LocalPlayer
-local Camera = workspace.CurrentCamera
 
---------------------------------------------------
--- BIẾN
-getgenv().AutoQuestOkaka = false
-getgenv().AutoOwnerTween = false
-
-local originCF, originCam
-local tweening = false
-
---------------------------------------------------
--- HÀM TWEEN
-local function tweenTo(cf, speed)
-	local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-	local hrp = char:WaitForChild("HumanoidRootPart")
-
-	local dist = (hrp.Position - cf.Position).Magnitude
-	local time = dist / speed
-
-	local tween = TweenService:Create(
-		hrp,
-		TweenInfo.new(time, Enum.EasingStyle.Linear),
-		{CFrame = cf}
-	)
-	tween:Play()
-	tween.Completed:Wait()
-end
-
---------------------------------------------------
--- AUTO QUEST OKAKA
 Tab:AddToggle({
 	Name = "Auto Quest Okaka",
 	Default = false,
