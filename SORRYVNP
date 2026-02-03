@@ -150,56 +150,7 @@ Tab:AddSlider({
 
 
 
-local TeleportButtons = {}
--- Tạo nút dịch chuyển
-Tab:AddTextbox({
-    Name = "Tạo nút dịch chuyển",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(text)
-        local player = game.Players.LocalPlayer
-        local char = player.Character
-        if char and char:FindFirstChild("HumanoidRootPart") then
-            local savePos = char.HumanoidRootPart.Position
-            -- Tạo button mới
-            local btn = Tab4:AddButton({
-                Name = text,
-                Callback = function()
-                    if char and char:FindFirstChild("HumanoidRootPart") then
-                        char.HumanoidRootPart.CFrame = CFrame.new(savePos)
-                    end
-                end
-            })
-            TeleportButtons[text] = {Button = btn, Position = savePos}
-            print("Đã tạo nút dịch chuyển: " .. text)
-        end
-    end
-})
 
--- Ghi tên nút cần xóa lưu
-Tab:AddTextbox({
-    Name = "Ghi tên nút cần xóa lưu",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(text)
-        if TeleportButtons[text] then
-            -- Không có hàm xóa button trực tiếp trong OrionLib, chỉ xóa khỏi bảng
-            TeleportButtons[text] = nil
-            print("Đã xóa nút: " .. text)
-        else
-            print("Không tìm thấy nút tên: " .. text)
-        end
-    end
-})
-
--- Xóa tất cả lưu settings
-Tab:AddButton({
-    Name = "Xóa tất cả lưu settings",
-    Callback = function()
-        TeleportButtons = {}
-        print("Đã xóa tất cả nút và dữ liệu lưu")
-    end
-})
 
 -- Giả sử Tab4 đã được tạo sẵn
 Tab2:AddToggle({
