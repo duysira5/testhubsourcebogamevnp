@@ -63,6 +63,7 @@ local Tab12 = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
+Tab1:AddLabel("xl bn Ck19545 minh sẽ add auto nv sớm nhat")
 local AuraRange = 50
 local auraCircle = nil
 
@@ -148,23 +149,6 @@ Tab:AddSlider({
 })
 
 
-Tab:AddToggle({
-	Name = "Auto Quest Okaka",
-	Default = false,
-	Callback = function(v)
-		getgenv().AutoQuestOkaka = v
-
-		if v then
-			task.spawn(function()
-				while true do
-workspace.NPCS.Quest10.ClickPart.QuestTake.QuestTake.Accept3.RemoteEvent:FireServer()
-wait(0.1)
-end
-				end
-			end)
-		end
-	end
-})
 
 
 ocal TeleportButtons = {}
