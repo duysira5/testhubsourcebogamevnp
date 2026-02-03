@@ -146,88 +146,60 @@ Tab:AddSlider({
         updateAuraCircle() -- cập nhật ngay lập tức khi kéo
     end    
 })
-local PvPLoop = false
 
+llocal Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+--------------------------------------------------
+-- BIẾN
+getgenv().AutoQuestOkaka = false
+getgenv().AutoOwnerTween = false
+
+local originCF, originCam
+local tweening = false
+
+--------------------------------------------------
+-- HÀM TWEEN
+local function tweenTo(cf, speed)
+	local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	local hrp = char:WaitForChild("HumanoidRootPart")
+
+	local dist = (hrp.Position - cf.Position).Magnitude
+	local time = dist / speed
+
+	local tween = TweenService:Create(
+		hrp,
+		TweenInfo.new(time, Enum.EasingStyle.Linear),
+		{CFrame = cf}
+	)
+	tween:Play()
+	tween.Completed:Wait()
+end
+
+--------------------------------------------------
+-- AUTO QUEST OKAKA
 Tab:AddToggle({
-    Name = "⭐Attack PvP Off",
-    Default = false,
-    Callback = function(Value)
-        PvPLoop = Value
-        if Value then
-            task.spawn(function()
-                while PvPLoop do
-                    local Players = game:GetService("Players")
-                    for _, player in pairs(Players:GetPlayers()) do
-                        if player and player:FindFirstChild("Backpack") then
-                            local backpack = player.Backpack
-                            -- Lặp qua toàn bộ item trong Backpack
-                            for _, item in pairs(backpack:GetChildren()) do
-                                if item:IsA("Tool") or item:IsA("Model") then
-                                    for _, property in pairs(item:GetChildren()) do
-                                        if property:IsA("RemoteEvent") then
-                                            property:FireServer()
-                                            print(player.Name .. " đã kích hoạt " .. item.Name .. " -> " .. property.Name .. "!")
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                    task.wait(1.2)
-                end
-            end)
-        else
-            print("⭐Attack PvP Off đã tắt")
-        end
-    end
+	Name = "Auto Quest Okaka",
+	Default = false,
+	Callback = function(v)
+		getgenv().AutoQuestOkaka = v
+
+		if v then
+			task.spawn(function()
+				while true do
+workspace.NPCS.Quest10.ClickPart.QuestTake.QuestTake.Accept3.RemoteEvent:FireServer()
+wait(0.1)
+end
+				end
+			end)
+		end
+	end
 })
 
 
--- Super ultra skill (chỉ kích hoạt 1 nửa)
-Tab:AddButton({
-    Name = "Super ultra skill",
-    Callback = function()
-        local allObjs = {}
-        for _, obj in ipairs(game:GetDescendants()) do
-            if obj:IsA("BindableEvent") or obj:IsA("RemoteEvent") then
-                if obj.Name == "Fire" then
-                    table.insert(allObjs, obj)
-                end
-            end
-        end
-        
-        local halfCount = math.floor(#allObjs / 2)
-        for i = 1, halfCount do
-            local obj = allObjs[i]
-            if obj:IsA("BindableEvent") then
-                obj:Fire()
-            elseif obj:IsA("RemoteEvent") then
-                obj:FireServer()
-            end
-        end
-        print("Super ultra skill: Đã kích hoạt " .. halfCount .. " event")
-    end
-})
-
--- ⭐Super Legendary Spam skill (kích hoạt toàn bộ)
-Tab:AddButton({
-    Name = "⭐Super Legendary Spam skill",
-    Callback = function()
-        for _, obj in ipairs(game:GetDescendants()) do
-            if obj:IsA("BindableEvent") or obj:IsA("RemoteEvent") then
-                if obj.Name == "Fire" then
-                    if obj:IsA("BindableEvent") then
-                        obj:Fire()
-                    elseif obj:IsA("RemoteEvent") then
-                        obj:FireServer()
-                    end
-                end
-            end
-        end
-        print("⭐Super Legendary Spam skill: Đã kích hoạt toàn bộ")
-    end
-})
-local TeleportButtons = {}
+ocal TeleportButtons = {}
 
 -- Tạo nút dịch chuyển
 Tab:AddTextbox({
